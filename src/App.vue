@@ -1,87 +1,29 @@
 
 <template>
   <div id="app" class="container">
-    <div class="header-section">
-      <h1 class="title is-1 header-text has-text-white has-text-weight-bold">Super Todo List</h1>
-      <div class="field is-grouped header-buttons">
-        <p class="control">
-          <a class="button is-warning" v-on:click="prioritiseTodos">
-            <span class="has-text-weight-bold">Prioritise</span>
-          </a>
-        </p>
-        <p class="control">
-          <a class="button is-danger" v-on:click="deleteAllTodos">
-            <span class="has-text-weight-bold">Delete All Todos</span>
-          </a>
-        </p>
-      </div>
-    </div>
+    <Header :prioritiseTodos="prioritiseTodos" :deleteAllTodos="deleteAllTodos" />
 
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div class="columns">
-      <div v-for="category in categoryTypes" :key="category.id" class="column">
-        <div class="todo-list">
-          <h3 class="title is-3">{{category.title}}</h3>
-          <p class="subtitle">{{category.description}}</p>
+      <div v-for="category in categoryTypes" :key="category.title" class="column">
+        <TodoList
+          :editTodo="editTodo"
+          :deleteTodo="deleteTodo"
+          :category="category"
+          :categoryTypes="categoryTypes"
+          :todos="todos"
+        />
 
-          <ul>
-            <li v-for="todo in todos" :key="todo.title" OrderBy="todo.priority">
-              <div v-if="category.title === todo.category" class="todo">
-                <div class="columns">
-                  <div class="column is-four-fifths todo-main">
-                    <input
-                      class="input is-info todo-title"
-                      type="text"
-                      :placeholder="todo.title"
-                      :value="todo.title"
-                      v-on:keyup.enter="() => editTodo(todo.id)"
-                    />
-                    <div class="select is-small is-fullwidth">
-                      <select v-model="todo.category">
-                        <option
-                          v-for="selectCategory in categoryTypes"
-                          :selected="selectCategory.title === todo.category? true: false"
-                          :key="selectCategory.title"
-                        >{{selectCategory.title}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="column">
-                    <font-awesome-icon
-                      :class="todo.priority? 'priority': 'not-priority'"
-                      v-on:click="todo.priority = !todo.priority"
-                      icon="star"
-                    />
-                    <font-awesome-icon
-                      class="trash-icon"
-                      v-on:click="()=> deleteTodo(todo.id)"
-                      icon="trash-alt"
-                    />
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="add-todo-section">
-          <div class="field">
-            <div class="control">
-              <input
-                class="input is-info"
-                type="text"
-                placeholder="Add a new todo"
-                v-on:keyup.enter="() => addTodo(category.title)"
-              />
-            </div>
-          </div>
-        </div>
+        <AddTodo :addTodo="addTodo" :category="category" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
+import AddTodo from "./components/AddTodo";
+
 export default {
   name: "app",
   methods: {
@@ -127,25 +69,25 @@ export default {
       todos: [
         {
           id: 0,
-          title: "I am also life changing todo",
+          title: "Make sure to feed the dog",
           priority: true,
           category: "Life Changing"
         },
         {
           id: 1,
-          title: "I am a life changing todo",
+          title: "Buy slippers",
           priority: false,
           category: "Life Changing"
         },
         {
           id: 2,
-          title: "I am an important todo",
+          title: "Book tickets to Disney",
           priority: false,
           category: "Important"
         },
         {
           id: 3,
-          title: "I am a meh todo",
+          title: "Feed parrot",
           priority: true,
           category: "Meh"
         }
@@ -153,7 +95,9 @@ export default {
     };
   },
   components: {
-    // HelloWorld
+    Header,
+    TodoList,
+    AddTodo
   }
 };
 </script>
@@ -183,78 +127,5 @@ body {
 
 .column {
   padding: 0.5rem;
-}
-
-.todo-list {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: #ededed;
-}
-
-.add-todo-section {
-  margin-top: 0.5rem;
-}
-
-.todo {
-  margin: 0.2rem;
-  border-radius: 0.5rem;
-  margin-bottom: 0.3rem;
-  padding: 0.5rem;
-  background-color: white;
-}
-
-.todo-main {
-  text-align: left;
-  padding: 0.2rem;
-}
-
-.header {
-  margin-bottom: 1rem;
-  font-weight: 800;
-}
-
-.header-section {
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-}
-
-.add-todo-icon {
-  color: white;
-}
-
-.header-buttons {
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.todo-title {
-  border: none !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-}
-
-select {
-  border: none !important;
-}
-
-.trash-icon {
-  color: #c7c7c7;
-}
-
-.trash-icon:hover {
-  color: #ed0e30;
-}
-
-.priority {
-  color: #ffe20a;
-}
-
-.priority:hover {
-  opacity: 0.5;
-  color: #ffe20a;
-}
-
-.not-priority {
-  color: #c7c7c7;
 }
 </style>
