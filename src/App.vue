@@ -37,6 +37,11 @@
                       v-on:click="todo.priority = !todo.priority"
                       icon="star"
                     />
+                    <font-awesome-icon
+                      class="trash-icon"
+                      v-on:click="()=> deleteTodo(todo.id)"
+                      icon="trash-alt"
+                    />
                   </div>
                 </div>
               </div>
@@ -70,10 +75,14 @@ export default {
     },
     addTodo: function(category) {
       this.todos.push({
+        id: this.todos.length + 1,
         title: event.target.value,
         priority: false,
         category: category
       });
+    },
+    deleteTodo: function(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
     }
   },
   data: function() {
@@ -105,21 +114,25 @@ export default {
       ],
       todos: [
         {
+          id: 0,
           title: "I am also life changing todo",
           priority: true,
           category: "LIFE_CHANGING"
         },
         {
+          id: 1,
           title: "I am a life changing todo",
           priority: false,
           category: "LIFE_CHANGING"
         },
         {
+          id: 2,
           title: "I am an important todo",
           priority: false,
           category: "IMPORTANT"
         },
         {
+          id: 3,
           title: "I am a meh todo",
           priority: true,
           category: "MEH"
@@ -201,6 +214,9 @@ select {
   border: none !important;
 }
 
+.trash-icon:hover {
+  color: #ed0e30;
+}
 .priority {
   text-align: center;
   color: #ffe20a;

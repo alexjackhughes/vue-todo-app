@@ -1,20 +1,24 @@
 import Vue from "vue";
-
-import VueLodash from "vue-lodash";
-const options = { name: "lodash" }; // customize the way you want to call it
-Vue.use(VueLodash, options); // options is optional
-
 import App from "./App.vue";
 
-// Setting up Bulma framework for styling
+// Setup Lodash used in filtering todos
+import VueLodash from "vue-lodash";
+const options = { name: "lodash" };
+Vue.use(VueLodash, options);
+
+// Setup Bulma framework for styling
 import "./../node_modules/bulma/css/bulma.css";
 
-// Setting up Font Awesome for icons
+// Setup Font Awesome for icons
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faPlusCircle,
+  faTrashAlt
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faStar, faPlusCircle);
+library.add(faStar, faPlusCircle, faTrashAlt);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
