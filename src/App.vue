@@ -220,11 +220,20 @@ select {
   border: none !important;
 }
 
+.trash-icon {
+  color: #c7c7c7;
+}
+
 .trash-icon:hover {
   color: #ed0e30;
 }
+
 .priority {
-  text-align: center;
+  color: #ffe20a;
+}
+
+.priority:hover {
+  opacity: 0.5;
   color: #ffe20a;
 }
 
