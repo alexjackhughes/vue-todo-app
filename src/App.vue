@@ -29,14 +29,14 @@
               <div v-if="category.title === todo.category" class="todo">
                 <div class="columns">
                   <div class="column is-four-fifths todo-main">
-                    <p>{{todo.title}}</p>
+                    <input
+                      class="input is-info todo-title"
+                      type="text"
+                      :placeholder="todo.title"
+                      :value="todo.title"
+                      v-on:keyup.enter="() => editTodo(todo.id)"
+                    />
                     <div class="select is-small is-fullwidth">
-                      <!-- <select v-on:click="() => changeCategory('hell', 'lo')">
-                        <option
-                          v-for="selectCategory in categoryTypes"
-                          :key="selectCategory.id"
-                        >{{selectCategory.title}}</option>
-                      </select>-->
                       <select v-model="todo.category">
                         <option
                           v-for="selectCategory in categoryTypes"
@@ -101,6 +101,14 @@ export default {
     },
     deleteAllTodos: function() {
       this.todos = [];
+    },
+    editTodo: function(id) {
+      this.todos[id] = {
+        id: id,
+        title: event.target.value,
+        priority: this.todos[id].priority,
+        category: this.todos[id].category
+      };
     }
   },
   data: function() {
@@ -217,6 +225,12 @@ body {
 .header-buttons {
   align-items: center !important;
   justify-content: center !important;
+}
+
+.todo-title {
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 select {
