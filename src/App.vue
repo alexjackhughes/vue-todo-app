@@ -14,7 +14,18 @@
               <!-- and now, we can access to an item using todo-->
               <div v-if="category.id === todo.category" class="todo">
                 <div class="columns">
-                  <p class="column is-three-quarters">{{todo.title}}</p>
+                  <div class="column is-four-fifths todo-main">
+                    <p>{{todo.title}}</p>
+                    <div class="select is-small is-fullwidth">
+                      <select>
+                        <option
+                          v-for="selectCategory in categoryTypes"
+                          :selected="selectCategory.id === category.id? true: false"
+                          :key="selectCategory.id"
+                        >{{selectCategory.title}}</option>
+                      </select>
+                    </div>
+                  </div>
                   <div class="column">
                     <font-awesome-icon
                       :class="todo.priority? 'priority': 'not-priority'"
@@ -23,7 +34,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <div v-else></div> -->
             </li>
           </ul>
         </div>
@@ -135,11 +145,15 @@ body {
 
 .todo {
   margin: 0.2rem;
-
   border-radius: 0.5rem;
   margin-bottom: 0.3rem;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: white;
+}
+
+.todo-main {
+  text-align: left;
+  padding: 0.2rem;
 }
 
 .header {
@@ -151,7 +165,12 @@ body {
   color: white;
 }
 
+select {
+  border: none !important;
+}
+
 .priority {
+  text-align: center;
   color: #ffe20a;
 }
 
