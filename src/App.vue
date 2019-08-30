@@ -16,7 +16,7 @@
           <p class="subtitle">{{category.description}}</p>
 
           <ul>
-            <li v-for="todo in todos" :key="todo.id" OrderBy="todo.priority">
+            <li v-for="todo in todos" :key="todo.title" OrderBy="todo.priority">
               <div v-if="category.id === todo.category" class="todo">
                 <div class="columns">
                   <div class="column is-four-fifths todo-main">
@@ -46,15 +46,14 @@
         <div class="add-todo-section">
           <div class="field">
             <div class="control">
-              <input class="input is-info" type="text" placeholder="Add a new todo" />
+              <input
+                class="input is-info"
+                type="text"
+                placeholder="Add a new todo"
+                v-on:keyup.enter="() => addTodo(category.id)"
+              />
             </div>
           </div>
-          <a class="button is-fullwidth is-danger">
-            <span class="has-text-weight-bold">ADD TODO</span>
-            <span class="icon is-small">
-              <font-awesome-icon class="add-todo-icon" icon="plus-circle" />
-            </span>
-          </a>
         </div>
       </div>
     </div>
@@ -68,11 +67,29 @@ export default {
   methods: {
     prioritiseTodos: function() {
       this.todos = this._.sortBy(this.todos, ["priority"]).reverse();
+    },
+    addTodo: function(category) {
+      this.todos.push({
+        title: event.target.value,
+        priority: false,
+        category: category
+      });
     }
   },
   data: function() {
     return {
-      newTodoText: "",
+      newMehTodo: {
+        text: "",
+        category: "MEH"
+      },
+      newImportantTodo: {
+        text: "",
+        category: "IMPORTANT"
+      },
+      newLifeChangingTodo: {
+        text: "",
+        category: "LIFE_CHANGING"
+      },
       categoryTypes: [
         { id: "MEH", title: "Meh", description: "Just ignore this stuff" },
         {
@@ -88,25 +105,21 @@ export default {
       ],
       todos: [
         {
-          id: 0,
           title: "I am also life changing todo",
           priority: true,
           category: "LIFE_CHANGING"
         },
         {
-          id: 1,
           title: "I am a life changing todo",
           priority: false,
           category: "LIFE_CHANGING"
         },
         {
-          id: 2,
           title: "I am an important todo",
           priority: false,
           category: "IMPORTANT"
         },
         {
-          id: 3,
           title: "I am a meh todo",
           priority: true,
           category: "MEH"
