@@ -1,7 +1,7 @@
 
 <template>
   <div id="app">
-    <h1>HELLO</h1>
+    <h1 class="title is-1">Super Fun Times</h1>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 
     <!-- Remember that todos is the name of our array -->
