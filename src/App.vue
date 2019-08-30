@@ -1,23 +1,39 @@
 
 <template>
-  <div id="app">
-    <h1 class="title is-1">Super Fun Times</h1>
+  <div id="app" class="container">
+    <h1 class="title is-1 header has-text-white has-text-weight-bold">Super Fun Times</h1>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <div v-for="category in categoryTypes" :key="category.id" class="flex">
-      <h3 class="title is-3">{{category.title}}</h3>
-      <p class="subtitle">{{category.description}}</p>
-      <font-awesome-icon class="addTodo" icon="plus-circle" />
+    <div class="columns">
+      <div v-for="category in categoryTypes" :key="category.id" class="column">
+        <div class="todo-list">
+          <h3 class="title is-3">{{category.title}}</h3>
+          <p class="subtitle">{{category.description}}</p>
 
-      <ul>
-        <li v-for="todo in todos" :key="todo.id" class="flex">
-          <!-- and now, we can access to an item using todo-->
-          <div v-if="category.id === todo.category">
-            {{todo.title}}
-            <font-awesome-icon :class="todo.priority? 'priority': 'not-priority'" icon="star" />
-          </div>
-          <!-- <div v-else></div> -->
-        </li>
-      </ul>
+          <ul>
+            <li v-for="todo in todos" :key="todo.id">
+              <!-- and now, we can access to an item using todo-->
+              <div v-if="category.id === todo.category" class="todo">
+                <div class="columns">
+                  <p class="column is-three-quarters">{{todo.title}}</p>
+                  <div class="column">
+                    <font-awesome-icon
+                      :class="todo.priority? 'priority': 'not-priority'"
+                      icon="star"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- <div v-else></div> -->
+            </li>
+          </ul>
+        </div>
+        <a class="button add-todo-button is-fullwidth is-danger">
+          <span class="has-text-weight-bold">ADD TODO</span>
+          <span class="icon is-small">
+            <font-awesome-icon class="add-todo" icon="plus-circle" />
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -78,16 +94,61 @@ export default {
 </script>
 
 <style>
-/* #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  padding: 0.5rem;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
-.addTodo {
-  color: #ff271c;
+  background-color: #34b1eb;
+}
+
+.columns {
+  padding: 10px;
+  position: relative;
+}
+
+.column {
+  padding: 0.5rem;
+}
+
+.todo-list {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #ededed;
+}
+
+.add-todo-button {
+  margin-top: 0.5rem;
+}
+.button {
+  border-radius: 0.5rem;
+}
+
+.todo {
+  margin: 0.2rem;
+
+  border-radius: 0.5rem;
+  margin-bottom: 0.3rem;
+  padding: 1rem;
+  background-color: white;
+}
+
+.header {
+  padding-top: 2rem;
+  font-weight: 800;
+}
+
+.add-todo {
+  color: white;
 }
 
 .priority {
