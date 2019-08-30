@@ -20,16 +20,22 @@
 
           <ul>
             <li v-for="todo in todos" :key="todo.title" OrderBy="todo.priority">
-              <div v-if="category.id === todo.category" class="todo">
+              <div v-if="category.title === todo.category" class="todo">
                 <div class="columns">
                   <div class="column is-four-fifths todo-main">
                     <p>{{todo.title}}</p>
                     <div class="select is-small is-fullwidth">
-                      <select>
+                      <!-- <select v-on:click="() => changeCategory('hell', 'lo')">
                         <option
                           v-for="selectCategory in categoryTypes"
-                          :selected="selectCategory.id === category.id? true: false"
                           :key="selectCategory.id"
+                        >{{selectCategory.title}}</option>
+                      </select>-->
+                      <select v-model="todo.category">
+                        <option
+                          v-for="selectCategory in categoryTypes"
+                          :selected="selectCategory.title === todo.category? true: false"
+                          :key="selectCategory.title"
                         >{{selectCategory.title}}</option>
                       </select>
                     </div>
@@ -58,7 +64,7 @@
                 class="input is-info"
                 type="text"
                 placeholder="Add a new todo"
-                v-on:keyup.enter="() => addTodo(category.id)"
+                v-on:keyup.enter="() => addTodo(category.title)"
               />
             </div>
           </div>
@@ -93,27 +99,13 @@ export default {
   },
   data: function() {
     return {
-      newMehTodo: {
-        text: "",
-        category: "MEH"
-      },
-      newImportantTodo: {
-        text: "",
-        category: "IMPORTANT"
-      },
-      newLifeChangingTodo: {
-        text: "",
-        category: "LIFE_CHANGING"
-      },
       categoryTypes: [
-        { id: "MEH", title: "Meh", description: "Just ignore this stuff" },
+        { title: "Meh", description: "Just ignore this stuff" },
         {
-          id: "IMPORTANT",
           title: "Important",
           description: "Probably should be doing this"
         },
         {
-          id: "LIFE_CHANGING",
           title: "Life Changing",
           description: "Dude, you have to do this stuff"
         }
@@ -123,25 +115,25 @@ export default {
           id: 0,
           title: "I am also life changing todo",
           priority: true,
-          category: "LIFE_CHANGING"
+          category: "Life Changing"
         },
         {
           id: 1,
           title: "I am a life changing todo",
           priority: false,
-          category: "LIFE_CHANGING"
+          category: "Life Changing"
         },
         {
           id: 2,
           title: "I am an important todo",
           priority: false,
-          category: "IMPORTANT"
+          category: "Important"
         },
         {
           id: 3,
           title: "I am a meh todo",
           priority: true,
-          category: "MEH"
+          category: "Meh"
         }
       ]
     };
