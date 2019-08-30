@@ -6,6 +6,9 @@
       <a class="button is-warning is-outlined" v-on:click="prioritiseTodos">
         <span class="has-text-weight-bold">Prioritise</span>
       </a>
+      <a class="button is-danger is-outlined" v-on:click="deleteAllTodos">
+        <span class="has-text-weight-bold">Delete All Todos</span>
+      </a>
     </div>
 
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -83,6 +86,9 @@ export default {
     },
     deleteTodo: function(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    deleteAllTodos: function() {
+      this.todos = [];
     }
   },
   data: function() {
