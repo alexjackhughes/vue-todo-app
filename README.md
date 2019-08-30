@@ -2,6 +2,8 @@
 
 _This is a simple Vue application that allows you to manage your tasks._
 
+![todo app screenshot](./src/assets/screenshot.png)
+
 ## Project setup
 
 ```
@@ -21,12 +23,6 @@ The **Frontend Vue App** will be running on:
 
 ```
 yarn run build
-```
-
-### Run your tests
-
-```
-yarn run test
 ```
 
 ### Lints and fixes files
