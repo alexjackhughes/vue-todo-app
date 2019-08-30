@@ -1,7 +1,7 @@
 
 <template>
   <div id="app" class="container">
-    <h1 class="title is-1 header has-text-white has-text-weight-bold">Super Fun Times</h1>
+    <h1 class="title is-1 header has-text-white has-text-weight-bold">Super Todo List</h1>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div class="columns">
       <div v-for="category in categoryTypes" :key="category.id" class="column">
@@ -11,7 +11,6 @@
 
           <ul>
             <li v-for="todo in todos" :key="todo.id">
-              <!-- and now, we can access to an item using todo-->
               <div v-if="category.id === todo.category" class="todo">
                 <div class="columns">
                   <div class="column is-four-fifths todo-main">
@@ -29,6 +28,7 @@
                   <div class="column">
                     <font-awesome-icon
                       :class="todo.priority? 'priority': 'not-priority'"
+                      v-on:click="todo.priority = !todo.priority"
                       icon="star"
                     />
                   </div>
@@ -37,12 +37,19 @@
             </li>
           </ul>
         </div>
-        <a class="button add-todo-button is-fullwidth is-danger">
-          <span class="has-text-weight-bold">ADD TODO</span>
-          <span class="icon is-small">
-            <font-awesome-icon class="add-todo" icon="plus-circle" />
-          </span>
-        </a>
+        <div class="add-todo-section">
+          <div class="field">
+            <div class="control">
+              <input class="input is-info" type="text" placeholder="Add a new todo" />
+            </div>
+          </div>
+          <a class="button is-fullwidth is-danger">
+            <span class="has-text-weight-bold">ADD TODO</span>
+            <span class="icon is-small">
+              <font-awesome-icon class="add-todo-icon" icon="plus-circle" />
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -56,12 +63,13 @@ export default {
   data: function() {
     return {
       newTodoText: "",
+      priorityQueue: false,
       categoryTypes: [
         { id: "MEH", title: "Meh", description: "Just ignore this stuff" },
         {
           id: "IMPORTANT",
           title: "Important",
-          description: "Like, kinda important stuff"
+          description: "Probably should be doing this"
         },
         {
           id: "LIFE_CHANGING",
@@ -136,11 +144,8 @@ body {
   background-color: #ededed;
 }
 
-.add-todo-button {
+.add-todo-section {
   margin-top: 0.5rem;
-}
-.button {
-  border-radius: 0.5rem;
 }
 
 .todo {
@@ -161,7 +166,7 @@ body {
   font-weight: 800;
 }
 
-.add-todo {
+.add-todo-icon {
   color: white;
 }
 
