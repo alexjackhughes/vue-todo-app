@@ -3,12 +3,18 @@
   <div id="app" class="container">
     <div class="header-section">
       <h1 class="title is-1 header-text has-text-white has-text-weight-bold">Super Todo List</h1>
-      <a class="button is-warning is-outlined" v-on:click="prioritiseTodos">
-        <span class="has-text-weight-bold">Prioritise</span>
-      </a>
-      <a class="button is-danger is-outlined" v-on:click="deleteAllTodos">
-        <span class="has-text-weight-bold">Delete All Todos</span>
-      </a>
+      <div class="field is-grouped header-buttons">
+        <p class="control">
+          <a class="button is-warning" v-on:click="prioritiseTodos">
+            <span class="has-text-weight-bold">Prioritise</span>
+          </a>
+        </p>
+        <p class="control">
+          <a class="button is-danger" v-on:click="deleteAllTodos">
+            <span class="has-text-weight-bold">Delete All Todos</span>
+          </a>
+        </p>
+      </div>
     </div>
 
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -206,6 +212,11 @@ body {
 
 .add-todo-icon {
   color: white;
+}
+
+.header-buttons {
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 select {
