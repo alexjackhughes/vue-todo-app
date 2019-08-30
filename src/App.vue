@@ -1,7 +1,13 @@
 
 <template>
   <div id="app" class="container">
-    <h1 class="title is-1 header has-text-white has-text-weight-bold">Super Todo List</h1>
+    <div class="header-section">
+      <h1 class="title is-1 header-text has-text-white has-text-weight-bold">Super Todo List</h1>
+      <a class="button is-warning is-outlined" v-on:click="prioritiseTodos">
+        <span class="has-text-weight-bold">Prioritise</span>
+      </a>
+    </div>
+
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div class="columns">
       <div v-for="category in categoryTypes" :key="category.id" class="column">
@@ -10,7 +16,7 @@
           <p class="subtitle">{{category.description}}</p>
 
           <ul>
-            <li v-for="todo in todos" :key="todo.id">
+            <li v-for="todo in todos" :key="todo.id" OrderBy="todo.priority">
               <div v-if="category.id === todo.category" class="todo">
                 <div class="columns">
                   <div class="column is-four-fifths todo-main">
@@ -57,13 +63,16 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: "app",
+  methods: {
+    prioritiseTodos: function() {
+      this.todos = this._.sortBy(this.todos, ["priority"]).reverse();
+    }
+  },
   data: function() {
     return {
       newTodoText: "",
-      priorityQueue: false,
       categoryTypes: [
         { id: "MEH", title: "Meh", description: "Just ignore this stuff" },
         {
@@ -162,8 +171,13 @@ body {
 }
 
 .header {
-  padding-top: 2rem;
+  margin-bottom: 1rem;
   font-weight: 800;
+}
+
+.header-section {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 
 .add-todo-icon {
