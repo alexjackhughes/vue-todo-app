@@ -1,6 +1,15 @@
 # Vue Todo App
 
-_This is a simple Vue application that allows you to manage your tasks._
+_This is a simple Vue application that allows you to manage your todos._
+
+### Features
+
+- **Add New Todo:** By typing into add new todo under the category you want
+- **Change Category:** Using the select on each todo
+- **Edit Todo:** By clicking the text of the todo and pressing enter
+- **Delete Todo:** By clicking the bin icon
+- **Delete All Todos:** By clicking the 'delete all' button
+- **Prioritize Todos:** By clicking the 'Prioritise' button, which will sort the todos so that that 'starred' todos appear at the top
 
 ![todo app screenshot](./src/assets/screenshot.png)
 
