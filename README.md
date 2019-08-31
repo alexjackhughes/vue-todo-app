@@ -2,6 +2,8 @@
 
 _This is a simple Vue application that allows you to manage your todos._
 
+![todo app screenshot](./src/assets/screenshot.png)
+
 ### Features
 
 - **Add New Todo:** By typing into add new todo under the category you want
@@ -10,8 +12,6 @@ _This is a simple Vue application that allows you to manage your todos._
 - **Delete Todo:** By clicking the bin icon
 - **Delete All Todos:** By clicking the 'delete all' button
 - **Prioritize Todos:** By clicking the 'Prioritise' button, which will sort the todos so that that 'starred' todos appear at the top
-
-![todo app screenshot](./src/assets/screenshot.png)
 
 ## Project setup
 
